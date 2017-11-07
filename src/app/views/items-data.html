@@ -1,0 +1,46 @@
+<mat-progress-bar mode="indeterminate" *ngIf="progressBar"></mat-progress-bar>
+
+<form *ngIf="!progressBar" (ngSubmit)="onSubmit(form)" #form="ngForm">
+  <mat-form-field>
+    <input matInput placeholder="Name" [(ngModel)]="item.name" #name="ngModel" name="name" required minlength="5">
+    <mat-error *ngIf="name.invalid">
+      Name is <strong>required</strong>
+    </mat-error>
+    <mat-error *ngIf="name.invalid && name.errors.minlength">
+      Name must be at least <strong>5 characters</strong> long
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Number" [(ngModel)]="item.number" #number="ngModel" name="number" required minlength="16" maxlength="16">
+    <mat-error *ngIf="number.invalid">
+      Number is <strong>required</strong>
+    </mat-error>
+    <mat-error *ngIf="number.invalid && number.errors.minlength">
+      Number must be at least <strong>16 characters</strong> long
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-select placeholder="Month" [(ngModel)]="item.month" #month="ngModel" name="month" required>
+      <mat-option value="{{ month }}" *ngFor="let month of months">{{ month }}</mat-option>
+    </mat-select>
+    <mat-error *ngIf="month.invalid">
+      Month is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-select placeholder="Year" [(ngModel)]="item.year" #year="ngModel" name="year" required>
+      <mat-option value="{{ year }}" *ngFor="let year of years">{{ year }}</mat-option>
+    </mat-select>
+    <mat-error *ngIf="month.invalid">
+      Year is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+
+  <div class="text-right">
+    <a mat-button routerLink="/items">Back</a>
+    <button mat-raised-button color="primary">Save</button>
+  </div>
+</form>

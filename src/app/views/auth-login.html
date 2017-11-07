@@ -1,0 +1,27 @@
+<mat-toolbar>Login</mat-toolbar>
+
+<mat-progress-bar mode="indeterminate" *ngIf="progressBar"></mat-progress-bar>
+
+<form *ngIf="!progressBar" (ngSubmit)="onSubmit(form)" #form="ngForm">
+  <mat-form-field>
+    <input matInput placeholder="Email" type="email" email [(ngModel)]="user.email" #email="ngModel" name="email" required maxlength="100">
+    <mat-error *ngIf="email.invalid">
+      Email is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Password" type="password" [(ngModel)]="user.password" #password="ngModel" name="password" required minlength="4" maxlength="20">
+    <mat-error *ngIf="password.invalid">
+      Password is <strong>required</strong>
+    </mat-error>
+    <mat-error *ngIf="password.invalid && password.errors.minlength">
+      Password must be at least <strong>4 characters</strong> long
+    </mat-error>
+  </mat-form-field>
+
+  <div class="text-right">
+    <a mat-button routerLink="/registration">Registration</a>
+    <button mat-raised-button color="primary">Save</button>
+  </div>
+</form>

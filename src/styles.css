@@ -1,0 +1,28 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+html, body {
+    margin: 5px auto;
+    width: 750px;
+}
+
+.mat-card {
+    margin: 10px 0;
+}
+
+.mat-progress-bar {
+    margin: 10px 0;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+}
+  
+form > * {
+    width: 100%;
+}
+
+.text-right {
+    text-align: right;
+}

@@ -1,0 +1,19 @@
+<mat-toolbar color="primary">
+  <a mat-button routerLink="/items/create">Create</a>
+</mat-toolbar>
+
+<mat-progress-bar mode="indeterminate" *ngIf="progressBar"></mat-progress-bar>
+
+<div *ngIf="!progressBar">
+  <mat-card *ngFor="let item of items">
+    <mat-card-header>
+      <mat-card-title>{{ item.name }}</mat-card-title>
+      <mat-card-subtitle>{{ item.number }}</mat-card-subtitle>
+      <mat-card-subtitle>{{ item.month }} / {{ item.year }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-actions class="text-right">
+      <a mat-button [routerLink]="['/items/edit', item.id]">Edit</a>
+      <button mat-button color="warn" (click)="delete(item.id)">Delete</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
