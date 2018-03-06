@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 
 @Injectable()
+
 export class DateService {
 
-  public getMonths(): String[] {
-    let i:      number;
-    let months: String[] = [];
-    let month:  String;
+  public getMonths(): string[] {
+    let i: number;
+    let months: string[] = [];
+    let month: string;
 
     for (i = 1; i < 13; i++) {
       month = '0' + String(i);
@@ -17,9 +18,9 @@ export class DateService {
     return months;
   }
 
-  public getYears(): String[] {
-    let i:     number;
-    let years: String[] = [];
+  public getYears(): string[] {
+    let i: number;
+    let years: string[] = [];
 
     let yearMin = Number((new Date()).getFullYear());
     let yearMax = yearMin + 10;

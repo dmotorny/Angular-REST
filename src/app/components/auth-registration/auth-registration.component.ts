@@ -1,24 +1,27 @@
-import { Component }   from '@angular/core';
-import { Router }      from '@angular/router';
-import { HttpClient }  from '@angular/common/http';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { MatSnackBar } from '@angular/material';
 
-import { User }        from '../../models/user';
+import { User } from '../../models/user';
+
+import { UsersService } from '../../services/users.service';
 
 @Component({
-  templateUrl: '../../views/auth-registration.html'
+  templateUrl: '../../views/auth-registration.html',
+  providers: [UsersService]
 })
 
 export class AuthRegistrationComponent {
 
-  progressBar: Boolean;
-  user:        User;
+  progressBar: boolean = false;
+  user: User = new User;
 
-  constructor(private router: Router, private http: HttpClient, public snackBar: MatSnackBar) {
-    this.progressBar = false;
-    this.user        = new User;
-  }
+  constructor(
+    private router: Router,
+    public snackBar: MatSnackBar,
+    private usersService: UsersService,
+  ) { }
 
   onSubmit(form) {
     if (form.invalid) {
@@ -27,9 +30,7 @@ export class AuthRegistrationComponent {
 
     this.progressBar = true;
 
-    this.http.post('registration', this.user, {responseType: 'text'}).subscribe(() => {
-      this.router.navigate(['/login']);
-    }, error => {
+    this.usersService.create(this.user).subscribe(() => this.router.navigate(['/login']), error => {
       this.progressBar = false;
 
       this.snackBar.open('User with this email exist', 'Close', {

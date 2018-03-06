@@ -1,31 +1,32 @@
-import { Component }   from '@angular/core';
-import { Router }      from '@angular/router';
-import { HttpClient }  from '@angular/common/http';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
-import { Item }        from '../../models/item';
+import { Item } from '../../models/item';
 
 import { DateService } from '../../services/date.service';
+import { ItemsService } from '../../services/items.service';
 
 @Component({
   templateUrl: '../../views/items-data.html',
+  providers: [DateService, ItemsService]
 })
 
 export class ItemsCreateComponent {
 
-  progressBar: Boolean;
+  progressBar: boolean = false;
 
-  item:        Item;
+  item: Item = new Item;
 
-  months:      String[];
-  years:       String[];
+  months: string[];
+  years: string[];
 
-  constructor(private router: Router, private http: HttpClient, private dateService: DateService) {
-    this.progressBar = false;
-
-    this.item        = new Item;
-
-    this.months      = dateService.getMonths();
-    this.years       = dateService.getYears();
+  constructor(
+    private router: Router,
+    private dateService: DateService,
+    private itemsService: ItemsService
+  ) {
+    this.months = dateService.getMonths();
+    this.years = dateService.getYears();
   }
 
   onSubmit(form) {
@@ -35,9 +36,7 @@ export class ItemsCreateComponent {
 
     this.progressBar = true;
 
-    this.http.post('item', this.item, {responseType: 'text'}).subscribe(() => {
-      this.router.navigate(['/items']);
-    });
+    this.itemsService.create(this.item).subscribe(() => this.router.navigate(['/items']));
   }
 
 }

@@ -1,5 +1,5 @@
 import { Injectable }  from '@angular/core';
-import { Router }      from '@angular/router';
+import { Router } from '@angular/router';
 import {
   HttpEvent,
   HttpInterceptor,
@@ -7,15 +7,16 @@ import {
   HttpRequest,
   HttpResponse,
   HttpErrorResponse
-}                      from '@angular/common/http';
+} from '@angular/common/http';
 
-import { Observable }  from 'rxjs/observable';
+import { Observable } from 'rxjs/observable';
 
 import { environment } from '../../environments/environment';
 
 import 'rxjs/add/operator/do';
 
 @Injectable()
+
 export class HttpInterceptorAll implements HttpInterceptor {
   constructor(private router: Router) { }
 
