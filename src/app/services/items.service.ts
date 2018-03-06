@@ -26,7 +26,7 @@ export class ItemsService {
    * Find item
    * 
    * @method find
-   * @param id {string|number} Id
+   * @param id {string|number} Item ID
    * @return {Observable} Observable
    */
   find(id: string|number): Observable<any> {
@@ -61,7 +61,7 @@ export class ItemsService {
    * Delete item
    * 
    * @method delete
-   * @param id {string|number} Id
+   * @param id {string|number} Item ID
    * @return {Observable} Observable
    */
   delete(id: string|number): Observable<any> {
